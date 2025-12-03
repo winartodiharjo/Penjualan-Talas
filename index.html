@@ -76,25 +76,40 @@
   <div style="background:white; padding:15px; width:90%; max-width:400px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); position:relative; overflow:hidden;">
 
     <!-- Slider container -->
-    <div id="slider" style="width:100%; height:250px; position:relative; border-radius:10px;">
-      <img src="img/1.jpg" style="width:100%; height:250px; position:relative; object-fit:cover; border-radius:10px; opacity:1; transition:opacity 0.8s;" />
-      <img src="img/2.jpg" style="width:100%; height:250px; position:relative; object-fit:cover; border-radius:10px; opacity:0; transition:opacity 0.8s;" />
-    </div>
+    <div id="slider" style="width:100%; height:250px; position:relative; border-radius:10px; overflow:hidden;">
+  <img src="img/1.jpg" class="slide" style="width:100%; height:250px; object-fit:cover; position:absolute; border-radius:10px; left:0;" />
+  <img src="img/2.jpg" class="slide" style="width:100%; height:250px; object-fit:cover; position:absolute; border-radius:10px; left:100%;" />
 
-    <h3>Talas Segar</h3>
-    <p>Harga: <strong>Rp 15.000 / kg</strong></p>
-  </div>
+  <!-- Tombol Navigasi -->
+  <button id="prev" style="position:absolute; top:50%; left:10px; transform:translateY(-50%); background:rgba(0,0,0,0.5); color:white; border:none; padding:8px 12px; border-radius:5px; cursor:pointer;">❮</button>
+  <button id="next" style="position:absolute; top:50%; right:10px; transform:translateY(-50%); background:rgba(0,0,0,0.5); color:white; border:none; padding:8px 12px; border-radius:5px; cursor:pointer;">❯</button>
 </div>
 
 <script>
-  let index = 0;
-  const slides = document.querySelectorAll('#slider img');
+  let current = 0;
+  const slides = document.querySelectorAll('.slide');
 
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.style.left = (i - index) * 100 + '%';
+    });
+  }
+
+  document.getElementById('next').onclick = () => {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  };
+
+  document.getElementById('prev').onclick = () => {
+    current = (current - 1 + slides.length) % slides.length;
+    showSlide(current);
+  };
+
+  // Auto slide
   setInterval(() => {
-    slides[index].style.opacity = 0;
-    index = (index + 1) % slides.length;
-    slides[index].style.opacity = 1;
-  }, 2500);
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  }, 3000);
 </script>
 </div>
 
