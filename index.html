@@ -30,10 +30,14 @@ font-weight: bold;
 50% { opacity: 0; }
 100% { opacity: 1; }
 }
+#loader {position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.9); display: flex; justify-content: center; align-items: center; z-index: 2000; font-size: 22px; font-weight: bold; color: #7c4d1e;}
+#loader::after {content: ""; width: 40px; height: 40px; border: 5px solid #7c4d1e; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;}
+@keyframes spin { to { transform: rotate(360deg);} }
 </style>
 </head>
 <body>
-
+<div id="loader">Memuat...</div>
+  
 <header><img src="img/logo.png" alt="Logo Toko Talas" style="width:30px; border-radius:50%;">
 Toko Talas Purworejo</header>
 <h2>Selamat Datang di Toko Talas</h2>
